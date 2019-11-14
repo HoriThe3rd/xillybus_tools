@@ -12,6 +12,7 @@
 class xillybus8{
 public:
     xillybus8(const char dev_file_write[], const char dev_file_read[]);
+    ~xillybus8();
     void xillybus_write(unsigned char tx);
     unsigned char xillybus_read();
 private:
@@ -24,6 +25,7 @@ private:
 class xillybus32{
 public:
     xillybus32(const char dev_file_write[], const char dev_file_read[]);
+    ~xillybus32();
     void xillybus_write(unsigned int tx);
     unsigned int xillybus_read();
 private:

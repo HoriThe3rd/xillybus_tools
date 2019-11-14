@@ -24,6 +24,11 @@ xillybus8::xillybus8(const char dev_file_write[], const char dev_file_read[]){
     }
 }
 
+xillybus8::~xillybus8(){
+  close(fd_w);
+  close(fd_r);
+}
+
 void xillybus8::xillybus_write(unsigned char tx){
     allwrite(fd_w, &tx, sizeof(tx));
 }
@@ -90,6 +95,11 @@ xillybus32::xillybus32(const char dev_file_write[], const char dev_file_read[]){
         printf("xillybus: fd_r open error. Please check the path and the permission.");
         exit(1);
     }
+}
+
+xillybus32::~xillybus32(){
+  close(fd_w);
+  close(fd_r);
 }
 
 void xillybus32::xillybus_write(unsigned int tx){
