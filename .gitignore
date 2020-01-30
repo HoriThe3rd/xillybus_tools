@@ -3,10 +3,12 @@
 # Ignore these files and directories.
 lib/
 
-*/project/*
+*/*/project/*
 !CMakeLists.txt
 
 .vscode/*
 !.vscode/c_cpp_properties.json
+
+python/__pycache__
 
 !LICENSE
