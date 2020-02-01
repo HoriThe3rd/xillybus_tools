@@ -6,6 +6,10 @@ class Xillybus32:
         self.fd_w = os.open(dev_path_w, os.O_WRONLY)
         self.fd_r = os.open(dev_path_r, os.O_RDONLY)
 
+    def __del__(self):
+        os.close(self.fd_w)
+        os.close(self.fd_r)
+
     def write(self, data):
         bytes_w = data.to_bytes(4, 'little')
         os.write(self.fd_w, bytes_w)
@@ -18,6 +22,10 @@ class Xillybus8:
     def __init__(self, dev_path_w='/dev/xillybus_write_8', dev_path_r='/dev/xillybus_read_8'):
         self.fd_w = os.open(dev_path_w, os.O_WRONLY)
         self.fd_r = os.open(dev_path_r, os.O_RDONLY)
+
+    def __del__(self):
+        os.close(self.fd_w)
+        os.close(self.fd_r)
 
     def write(self, data):
         bytes_w = data.to_bytes(1, 'little')
