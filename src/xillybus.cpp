@@ -104,6 +104,7 @@ xillybus32::~xillybus32(){
 
 void xillybus32::xillybus_write(unsigned int tx){
     allwrite(fd_w, &tx, sizeof(tx));
+    fsync(fd_w);
 }
 
 unsigned int xillybus32::xillybus_read(){
