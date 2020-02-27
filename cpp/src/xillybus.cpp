@@ -34,12 +34,15 @@ void xillybus8::xillybus_write(unsigned char tx){
 }
 
 unsigned char xillybus8::xillybus_read(){
-    int rc;
+    int rc = 0;
     unsigned char buf;
-    rc = read(fd_r, &buf, sizeof(buf));
-    if(rc<0){
-        printf("xillybus read error.");
+    // check the result.
+    while(rc < 1){
+      rc = read(fd_r, &buf, sizeof(buf));
+      if(rc < 0){
+        printf("xillybus8 read error.");
         exit(1);
+      }
     }
     return buf;
 }
