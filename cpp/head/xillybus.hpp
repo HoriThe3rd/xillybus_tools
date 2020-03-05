@@ -15,7 +15,7 @@ public:
     xillybus8(const char dev_file_write[], const char dev_file_read[]);
     ~xillybus8();
     void xillybus_write(unsigned char tx);
-	void xillybus_write(unsigned char tx[]);
+	void xillybus_write(unsigned char tx[], const int size);
 	void xillybus_write(std::vector<unsigned char> tx);
     unsigned char xillybus_read();
 private:
@@ -30,7 +30,7 @@ public:
     xillybus32(const char dev_file_write[], const char dev_file_read[]);
     ~xillybus32();
     void xillybus_write(unsigned int tx);
-	void xillybus_write(unsigned int tx[]);
+	void xillybus_write(unsigned int tx[], const int size);
 	void xillybus_write(std::vector<unsigned int> tx);
     unsigned int xillybus_read();
 private:

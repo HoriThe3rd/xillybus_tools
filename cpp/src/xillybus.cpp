@@ -33,8 +33,8 @@ void xillybus8::xillybus_write(unsigned char tx){
     allwrite(fd_w, &tx, sizeof(tx));
 }
 
-void xillybus8::xillybus_write(unsigned char tx[]){
-	allwrite(fd_w, tx, sizeof(tx));
+void xillybus8::xillybus_write(unsigned char tx[], const int size){
+	allwrite(fd_w, tx, size);
 }
 
 void xillybus8::xillybus_write(std::vector<unsigned char> tx){
@@ -118,8 +118,8 @@ void xillybus32::xillybus_write(unsigned int tx){
     fsync(fd_w);
 }
 
-void xillybus32::xillybus_write(unsigned int tx[]){
-	allwrite(fd_w, tx, sizeof(tx));
+void xillybus32::xillybus_write(unsigned int tx[], const int size){
+	allwrite(fd_w, tx, size);
 }
 
 void xillybus32::xillybus_write(std::vector<unsigned int> tx){
