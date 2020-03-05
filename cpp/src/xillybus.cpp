@@ -55,6 +55,14 @@ unsigned char xillybus8::xillybus_read(){
     return buf;
 }
 
+void xillybus8::xillybus_read_as_array(unsigned char rx[], const int size){
+
+}
+
+void xillybus8::xillybus_read_as_vector(std::vector<unsigned char>& rx){
+
+}
+
 /*
    ---From Xillybus demoapp---
    Plain write() may not write all bytes requested in the buffer, so
@@ -173,6 +181,14 @@ unsigned int xillybus32::xillybus_read(){
         exit(1);
     }
     return buf;
+}
+
+void xillybus32::xillybus_read_as_array(unsigned int rx[], const int size){
+
+}
+
+void xillybus32::xillybus_read_as_vector(std::vector<unsigned int>& rx){
+
 }
 
 /*
