@@ -56,6 +56,7 @@ unsigned char xillybus8::xillybus_read(){
 }
 
 /*
+   ---From Xillybus demoapp---
    Plain write() may not write all bytes requested in the buffer, so
    allwrite() loops until all data was indeed written, or exits in
    case of failure, except for EINTR. The way the EINTR condition is
@@ -89,6 +90,43 @@ void xillybus8::allwrite(int fd, unsigned char *buf, int len) {
     }
 
     sent += rc;
+  }
+}
+
+/*
+   ---From Xillybus demoapp---
+   Plain read() may not read all bytes requested in the buffer, so
+   allread() loops until all data was indeed read, or exits in
+   case of failure, except for EINTR. The way the EINTR condition is
+   handled is the standard way of making sure the process can be suspended
+   with CTRL-Z and then continue running properly.
+
+   The function has no return value, because it always succeeds (or exits
+   instead of returning).
+
+   The function doesn't expect to reach EOF either.
+*/
+void xillybus8::allread(int fd, unsigned char *buf, int len) {
+  int received = 0;
+  int rc;
+
+  while (received < len) {
+    rc = read(fd, buf + received, len - received);
+
+    if ((rc < 0) && (errno == EINTR))
+      continue;
+
+    if (rc < 0) {
+      perror("allread() failed to read");
+      exit(1);
+    }
+
+    if (rc == 0) {
+      fprintf(stderr, "Reached read EOF (?!)\n");
+      exit(1);
+    }
+
+    received += rc;
   }
 }
 
@@ -171,5 +209,42 @@ void xillybus32::allwrite(int fd, unsigned int *buf, int len) {
     }
 
     sent += rc;
+  }
+}
+
+/*
+   ---From Xillybus demoapp---
+   Plain read() may not read all bytes requested in the buffer, so
+   allread() loops until all data was indeed read, or exits in
+   case of failure, except for EINTR. The way the EINTR condition is
+   handled is the standard way of making sure the process can be suspended
+   with CTRL-Z and then continue running properly.
+
+   The function has no return value, because it always succeeds (or exits
+   instead of returning).
+
+   The function doesn't expect to reach EOF either.
+*/
+void xillybus32::allread(int fd, unsigned int *buf, int len) {
+  int received = 0;
+  int rc;
+
+  while (received < len) {
+    rc = read(fd, buf + received, len - received);
+
+    if ((rc < 0) && (errno == EINTR))
+      continue;
+
+    if (rc < 0) {
+      perror("allread() failed to read");
+      exit(1);
+    }
+
+    if (rc == 0) {
+      fprintf(stderr, "Reached read EOF (?!)\n");
+      exit(1);
+    }
+
+    received += rc;
   }
 }
