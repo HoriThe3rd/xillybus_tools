@@ -42,16 +42,8 @@ void xillybus8::xillybus_write(std::vector<unsigned char> tx){
 }
 
 unsigned char xillybus8::xillybus_read(){
-    int rc = 0;
     unsigned char buf;
-    // check the result.
-    while(rc < 1){
-      rc = read(fd_r, &buf, sizeof(buf));
-      if(rc < 0){
-        printf("xillybus8 read error.");
-        exit(1);
-      }
-    }
+    allread(fd_r, &buf, sizeof(buf));
     return buf;
 }
 
@@ -173,13 +165,8 @@ void xillybus32::xillybus_write(std::vector<unsigned int> tx){
 }
 
 unsigned int xillybus32::xillybus_read(){
-    int rc;
     unsigned int buf;
-    rc = read(fd_r, &buf, sizeof(buf));
-    if(rc<0){
-        printf("xillybus read error.");
-        exit(1);
-    }
+    allread(fd_r, &buf, sizeof(buf));
     return buf;
 }
 
