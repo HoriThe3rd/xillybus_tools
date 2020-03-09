@@ -6,7 +6,8 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <termio.h>
+#include <iostream>
+//#include <termio.h>
 #include <unistd.h>
 
 xillybus8::xillybus8(const char dev_file_write[], const char dev_file_read[]) {
@@ -15,15 +16,15 @@ xillybus8::xillybus8(const char dev_file_write[], const char dev_file_read[]) {
     fd_r = open(dev_file_read, O_RDONLY);
     // Validate results of open functions.
     if (fd_w < 0) {
-        printf(
-            "xillybus: fd_w open error. Please check the path and the "
-            "permission.");
+        std::cout << "xillybus: fd_w open error. Please check the path and the "
+                     "permission."
+                  << std::endl;
         exit(1);
     }
     if (fd_r < 0) {
-        printf(
-            "xillybus: fd_r open error. Please check the path and the "
-            "permission.");
+        std::cout << "xillybus: fd_r open error. Please check the path and the "
+                     "permission."
+                  << std::endl;
         exit(1);
     }
 }
@@ -83,12 +84,12 @@ void xillybus8::allwrite(int fd, unsigned char *buf, int len) {
         if ((rc < 0) && (errno == EINTR)) continue;
 
         if (rc < 0) {
-            perror("allwrite() failed to write");
+            std::cerr << "allwrite() failed to write" << std::endl;
             exit(1);
         }
 
         if (rc == 0) {
-            fprintf(stderr, "Reached write EOF (?!)\n");
+            std::cerr << "Reached write EOF (?!)" << std::endl;
             exit(1);
         }
 
@@ -119,12 +120,12 @@ void xillybus8::allread(int fd, unsigned char *buf, int len) {
         if ((rc < 0) && (errno == EINTR)) continue;
 
         if (rc < 0) {
-            perror("allread() failed to read");
+            std::cerr << "allread() failed to read" << std::endl;
             exit(1);
         }
 
         if (rc == 0) {
-            fprintf(stderr, "Reached read EOF (?!)\n");
+            std::cerr << "Reached read EOF (?!)" << std::endl;
             exit(1);
         }
 
@@ -140,15 +141,15 @@ xillybus32::xillybus32(const char dev_file_write[],
     fd_r = open(dev_file_read, O_RDONLY);
     // Validate results of open functions.
     if (fd_w < 0) {
-        printf(
-            "xillybus: fd_w open error. Please check the path and the "
-            "permission.");
+        std::cout << "xillybus: fd_w open error. Please check the path and the "
+                     "permission."
+                  << std::endl;
         exit(1);
     }
     if (fd_r < 0) {
-        printf(
-            "xillybus: fd_r open error. Please check the path and the "
-            "permission.");
+        std::cout << "xillybus: fd_r open error. Please check the path and the "
+                     "permission."
+                  << std::endl;
         exit(1);
     }
 }
@@ -208,12 +209,12 @@ void xillybus32::allwrite(int fd, unsigned int *buf, int len) {
         if ((rc < 0) && (errno == EINTR)) continue;
 
         if (rc < 0) {
-            perror("allwrite() failed to write");
+            std::cerr << "allwrite() failed to write" << std::endl;
             exit(1);
         }
 
         if (rc == 0) {
-            fprintf(stderr, "Reached write EOF (?!)\n");
+            std::cerr << "Reached write EOF (?!)" << std::endl;
             exit(1);
         }
 
@@ -244,12 +245,12 @@ void xillybus32::allread(int fd, unsigned int *buf, int len) {
         if ((rc < 0) && (errno == EINTR)) continue;
 
         if (rc < 0) {
-            perror("allread() failed to read");
+            std::cerr << "allread() failed to read" << std::endl;
             exit(1);
         }
 
         if (rc == 0) {
-            fprintf(stderr, "Reached read EOF (?!)\n");
+            std::cerr << "Reached read EOF (?!)" << std::endl;
             exit(1);
         }
 
