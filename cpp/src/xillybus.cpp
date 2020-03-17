@@ -203,7 +203,7 @@ void xillybus32::allwrite(int fd, unsigned int *buf, int len) {
     int rc;
 
     while (sent < len) {
-        rc = write(fd, buf + sent, len - sent);
+        rc = write(fd, buf + sent / 4, len - sent);
 
         if ((rc < 0) && (errno == EINTR)) continue;
 
@@ -239,12 +239,13 @@ void xillybus32::allread(int fd, unsigned int *buf, int len) {
     int rc;
 
     while (received < len) {
-        rc = read(fd, buf + received, len - received);
+        rc = read(fd, buf + received / 4, len - received);
 
         if ((rc < 0) && (errno == EINTR)) continue;
 
         if (rc < 0) {
-            std::cerr << "allread() failed to read" << std::endl;
+            std::cerr << "allread() failed to read"
+                      << ", errno: " << errno << std::endl;
             exit(1);
         }
 
