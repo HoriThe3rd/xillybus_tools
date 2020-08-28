@@ -34,7 +34,7 @@ class xillybus32 {
     xillybus32(const char dev_file_write[], const char dev_file_read[]);
     ~xillybus32();
     void xillybus_write(unsigned int tx);
-    void xillybus_write(unsigned int tx[], const int size);
+    void xillybus_write(unsigned int tx[], const int size); // size means byte size.
     void xillybus_write(std::vector<unsigned int> tx);
     unsigned int xillybus_read();
     void xillybus_read_as_array(unsigned int rx[], const int size);
